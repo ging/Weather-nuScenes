@@ -1,6 +1,6 @@
 # Weather-nuScenes Dataset Grid Viewer
 
-This project is a static image viewer for the `dataset_test` folder with a sample of the Weather-nuScenes dataset that can access in: [https://doi.org/10.5281/zenodo.21135950](https://doi.org/10.5281/zenodo.21135950)
+This project is a static image viewer for the `dataset_test` folder with a sample of the Weather-nuScenes dataset that can be accessed in: [https://doi.org/10.5281/zenodo.21135950](https://doi.org/10.5281/zenodo.21135950)
 
 It shows:
 
