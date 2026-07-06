@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dataset Grid Viewer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="app-header">
+      <div>
+        <p class="eyebrow">Dataset Viewer</p>
+        <h1>Weather Condition x Camera Grid</h1>
+      </div>
+      <p id="dataset-summary" class="dataset-summary"></p>
+    </header>
+
+    <section class="toolbar" aria-label="Top pagination controls">
+      <button id="prev-page-top" type="button">Previous</button>
+      <div id="pagination-status-top" class="pagination-status"></div>
+      <button id="next-page-top" type="button">Next</button>
+    </section>
+
+    <section id="viewer" class="viewer" aria-live="polite"></section>
+
+    <section class="toolbar toolbar-bottom" aria-label="Bottom pagination controls">
+      <button id="prev-page-bottom" type="button">Previous</button>
+      <div id="pagination-status-bottom" class="pagination-status"></div>
+      <button id="next-page-bottom" type="button">Next</button>
+    </section>
+  </main>
+
+  <div id="comparison-modal" class="comparison-modal" hidden>
+    <div class="comparison-backdrop" data-close-modal="true"></div>
+    <div class="comparison-dialog" role="dialog" aria-modal="true" aria-labelledby="comparison-title">
+      <button id="comparison-close" class="comparison-close" type="button" aria-label="Close comparison">Close</button>
+      <h2 id="comparison-title" class="comparison-title"></h2>
+      <div class="comparison-grid">
+        <figure class="comparison-panel">
+          <figcaption>Original</figcaption>
+          <img id="comparison-original" alt="Original comparison image">
+        </figure>
+        <figure class="comparison-panel">
+          <figcaption>Selected</figcaption>
+          <img id="comparison-variant" alt="Selected comparison image">
+        </figure>
+      </div>
+    </div>
+  </div>
+
+  <script src="manifest.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

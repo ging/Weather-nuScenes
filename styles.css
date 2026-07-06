@@ -1,0 +1,367 @@
+:root {
+  color-scheme: light;
+  --page-bg: #eef5f7;
+  --panel-bg: rgba(255, 255, 255, 0.9);
+  --panel-border: rgba(33, 66, 82, 0.12);
+  --accent: #0b7285;
+  --accent-strong: #074e60;
+  --text-main: #17303b;
+  --text-soft: #5a7480;
+  --shadow: 0 20px 45px rgba(44, 86, 103, 0.12);
+  --table-min-width: 1260px;
+  --thumb-width: 180px;
+  --thumb-height: 102px;
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(127, 215, 255, 0.18), transparent 26%),
+    linear-gradient(180deg, #f7fbfc 0%, #ecf4f7 100%);
+  color: var(--text-main);
+}
+
+.app-shell {
+  width: min(96vw, 1800px);
+  margin: 0 auto;
+  padding: 32px 0 56px;
+}
+
+.app-header,
+.toolbar,
+.photo-card {
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 24px 28px;
+  align-items: end;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  line-height: 1.05;
+}
+
+.dataset-summary,
+.pagination-status,
+.photo-meta,
+.empty-state {
+  color: var(--text-soft);
+}
+#dataset-folder {
+  display: none;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin: 22px 0 28px;
+  padding: 14px 18px;
+}
+
+.toolbar-bottom {
+  margin: 28px 0 0;
+}
+
+button {
+  border: 0;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fffaf5;
+  padding: 10px 18px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 150ms ease, opacity 150ms ease, background 150ms ease;
+}
+
+button:hover:not(:disabled) {
+  background: var(--accent-strong);
+  transform: translateY(-1px);
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.viewer {
+  display: grid;
+  gap: 28px;
+}
+
+.photo-card {
+  padding: 20px;
+}
+
+.photo-card-header {
+  display: flex;
+  justify-content: flex-start;
+  gap: 18px;
+  align-items: baseline;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+.photo-card h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.photo-meta {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.grid-scroll {
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: 180px repeat(var(--condition-count), minmax(var(--thumb-width), 1fr));
+  min-width: var(--table-min-width);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(95, 69, 41, 0.1);
+}
+
+.grid-corner,
+.column-header,
+.row-header {
+  background: #dbeaf0;
+  color: #32505e;
+  font-weight: 700;
+}
+
+.grid-corner,
+.column-header,
+.row-header,
+.grid-cell {
+  padding: 12px;
+  border-right: 1px solid rgba(95, 69, 41, 0.1);
+  border-bottom: 1px solid rgba(95, 69, 41, 0.1);
+}
+
+.column-header {
+  text-align: center;
+}
+
+.row-header {
+  display: flex;
+  align-items: center;
+  font-size: 0.78rem;
+  line-height: 1.25;
+  letter-spacing: 0.03em;
+}
+
+.grid-corner {
+  font-size: 0.78rem;
+  line-height: 1.25;
+}
+
+.grid-cell {
+  position: relative;
+  background: rgba(255, 255, 255, 0.74);
+}
+
+.grid-cell img {
+  display: block;
+  width: 100%;
+  height: var(--thumb-height);
+  object-fit: cover;
+  border-radius: 12px;
+  background: #d5e2e8;
+}
+
+.cell-actions {
+  position: absolute;
+  inset: 12px 12px auto 12px;
+  z-index: 1;
+  display: flex;
+  justify-content: flex-end;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 160ms ease;
+}
+
+.grid-cell:hover .cell-actions,
+.grid-cell:focus-within .cell-actions {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.cell-compare-button {
+  border: 0;
+  border-radius: 999px;
+  background: rgba(12, 40, 51, 0.72);
+  color: #ffffff;
+  padding: 8px 12px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.cell-compare-button:hover {
+  background: rgba(12, 40, 51, 0.9);
+}
+
+.grid-cell[data-has-image="true"] img {
+  cursor: zoom-in;
+}
+
+.missing-cell {
+  display: grid;
+  place-items: center;
+  height: var(--thumb-height);
+  border-radius: 12px;
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(158, 61, 34, 0.08),
+    rgba(158, 61, 34, 0.08) 10px,
+    rgba(158, 61, 34, 0.14) 10px,
+    rgba(158, 61, 34, 0.14) 20px
+  );
+  color: var(--accent-strong);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 32px 20px;
+  background: var(--panel-bg);
+  border-radius: 20px;
+  border: 1px dashed rgba(95, 69, 41, 0.25);
+}
+
+.empty-state strong,
+.data-loader code {
+  font-family: "SFMono-Regular", Consolas, monospace;
+}
+
+@media (max-width: 900px) {
+  .app-shell {
+    width: min(98vw, 1800px);
+    padding-top: 18px;
+  }
+
+  .app-header,
+  .photo-card {
+    padding: 18px;
+  }
+
+  .app-header,
+  .photo-card-header,
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .toolbar {
+    text-align: center;
+  }
+}
+
+.comparison-modal[hidden] {
+  display: none;
+}
+
+.comparison-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+}
+
+.comparison-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(16, 33, 42, 0.56);
+  backdrop-filter: blur(4px);
+}
+
+.comparison-dialog {
+  position: relative;
+  z-index: 1;
+  width: min(96vw, 1380px);
+  margin: 3vh auto;
+  background: rgba(255, 255, 255, 0.97);
+  border: 1px solid rgba(33, 66, 82, 0.12);
+  border-radius: 24px;
+  box-shadow: 0 26px 70px rgba(15, 42, 54, 0.22);
+  padding: 28px;
+}
+
+.comparison-close {
+  display: inline-flex;
+  margin-left: auto;
+  margin-bottom: 10px;
+}
+
+.comparison-title {
+  margin: 0 0 18px;
+  font-size: 1.15rem;
+}
+
+.comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.comparison-panel {
+  margin: 0;
+  padding: 14px;
+  border-radius: 18px;
+  background: #f3f8fa;
+}
+
+.comparison-panel figcaption {
+  margin-bottom: 10px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+}
+
+.comparison-panel img {
+  display: block;
+  width: 100%;
+  max-height: 76vh;
+  object-fit: contain;
+  border-radius: 14px;
+  background: #d5e2e8;
+}
+
+@media (max-width: 900px) {
+  .comparison-grid {
+    grid-template-columns: 1fr;
+  }
+}
